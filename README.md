@@ -16,3 +16,6 @@ The bot is hosted on Render for continuous availability.
 - **/generate**: This command generates a CSV file containing the list of all live scores along with timestamps. This is useful for keeping a historical record of live scores.
 - **/latest**: This command fetches and provides a snippet of the latest cricket news, keeping you updated with the latest happenings in the cricket world.
 - **/help**: This command lists all the available commands along with their descriptions, helping users understand what each command does.
+
+To add Crickey to your server, use this link:
+    - https://discord.com/oauth2/authorize?client_id=1176856974550388767&permissions=18152947842192&integration_type=0&scope=bot
