@@ -6,6 +6,10 @@ from dotenv import load_dotenv
 from scraper import scrape_live_scores
 from scraper import latest
 from scraper import append_to_csv
+
+import threading
+from http.server import BaseHTTPRequestHandler, HTTPServer
+
 load_dotenv()
 
 TOKEN = os.getenv('BOT_TOKEN')
@@ -49,5 +53,25 @@ async def generate_csv(ctx):
 async def get_latest(ctx):
         text=latest()
         await ctx.send(text)
+        
+        
+
+class SimpleHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.send_header('Content-type', 'text/html')
+        self.end_headers()
+        self.wfile.write(b"Hello, this is a simple HTTP server for the Discord bot!")
+
+def run_http_server():
+    server_address = ('', 8080)
+    httpd = HTTPServer(server_address, SimpleHandler)
+    print("Starting HTTP server on port 8080")
+    httpd.serve_forever()
+
+# Start the HTTP server in a separate thread
+http_thread = threading.Thread(target=run_http_server)
+http_thread.daemon = True
+http_thread.start()
 
 bot.run(TOKEN)
